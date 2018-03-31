@@ -11,6 +11,7 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"graphql": "^0.13.2",
 		"micro": "^9.1.4",
 		"pino": "^4.15.3"
 	},
