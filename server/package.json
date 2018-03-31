@@ -5,13 +5,14 @@
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"dev": "micro-dev",
-		"start": "micro"
+		"dev": "micro-dev -p 8999",
+		"start": "micro -p 8999"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"graphql": "^0.13.2",
+		"graphql-subscriptions": "^0.5.8",
 		"micro": "^9.1.4",
 		"pino": "^4.15.3"
 	},

@@ -1,0 +1,12 @@
+type Time {
+	time: Int
+}
+
+type Query {
+	hello: String
+	time: Int
+}
+
+type Mutation {
+	setTime(time: Int): Time
+}
