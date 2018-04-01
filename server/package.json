@@ -13,10 +13,12 @@
 	"dependencies": {
 		"graphql": "^0.13.2",
 		"graphql-subscriptions": "^0.5.8",
+		"graphql-tools": "^2.23.1",
 		"micro": "^9.1.4",
 		"pino": "^4.15.3"
 	},
 	"devDependencies": {
+		"eslint": "^4.19.1",
 		"micro-dev": "^2.2.2"
 	}
 }

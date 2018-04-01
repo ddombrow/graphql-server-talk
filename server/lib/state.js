@@ -1,10 +1,10 @@
 class State {
 	constructor() {
 		this.time = new Date().getTime();
-		/*setInterval(() => {
+		setInterval(() => {
 			let oldTime = this.getTime();
 			this.setTime(oldTime + 1000);
-		});*/
+		});
 	}
 
 	setTime(time) {
