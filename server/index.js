@@ -1,69 +1,66 @@
-const micro = require("micro");
-const { json, send, createError } = require("micro");
-const pino = require("pino")();
-const { execute, validate, parse } = require("graphql");
-const State = require("./lib/State");
-const fs = require("fs");
-const pubsub = require("./pubsub");
-const { makeExecutableSchema } = require("graphql-tools");
+const pino = require("pino");
+const chalk = require("chalk");
+const body = require("./lib/body");
+const { gqlHandler, createSubscriptionServer } = require("./gql");
 
-const state = new State();
+const pkg = require("../package.json");
+const http = require("http");
 
-const typeDefs = fs.readFileSync(__dirname + "/schema.gql", { encoding: "utf8" });
-const resolvers = {
-	Query: {
-		hello: () => {
-			return "Hello world!";
-		},
-		time: (obj, args, ctx) => {
-			return ctx.state.getTime();
-		}
-	},
-	Mutation: {
-		setTime: (obj, args, ctx) => {
-			const newTime = ctx.state.setTime(args.time);
-			pubsub.publish("time_changed", { time: newTime });
-			return { time: newTime };
-		}
-	},
-	Subscription: {
-		timeChanged: {
-			subscribe: () => pubsub.asyncIterator("time_changed")
-		}
-	}
-};
-
-const schema = makeExecutableSchema({
-	typeDefs,
-	resolvers,
-	logger: {
-		log: log => pino.info(log)
-	}
-});
+let server;
+const PORT = 9031;
+const testEnv = process.env.NODE_ENV === "test";
 
 async function main(req, res) {
-	try {
-		const body = await json(req);
-		//pino.info(body);
-		const parsedQuery = parse(body.query);
+	req.log = pino({
+		level: testEnv ? "silent" : "info"
+	});
 
-		let result;
-		let errors;
-		errors = await validate(schema, parsedQuery);
-		result = await execute(schema, parsedQuery, null, { state }, body.variables);
-
-		//let second = await graphql(oldSchema, body.query, resolvers, null, body.variables);
-		res.setHeader("Content-Type", "application/json");
-		return result;
-	} catch (err) {
-		pino.error(err);
-		send(res, 500, { msg: "Top level server error." });
+	req.log.info(req);
+	if (req.url === "/") {
+		res.writeHead(200, { "Content-Type": "application/json" });
+		res.write(JSON.stringify({ status: "alive" }));
+		res.end();
+	} else if (req.url === "/graphql") {
+		req.body = await body.json(req);
+		await gqlHandler(req, res);
+		res.end();
 	}
 }
 
-if (require.main === module) {
-	server = micro(main);
-	server.listen(8999);
+function start() {
+	server = http.createServer(main).listen(PORT);
+	createSubscriptionServer(server);
 }
 
-module.exports = main;
+function getServer() {
+	return server;
+}
+
+function stop() {
+	server.close();
+}
+
+module.exports = {
+	start,
+	stop,
+	getServer
+};
+
+if (!module.parent) {
+	start();
+	global.console.log(chalk`{green ${pkg.name}} server started listening on {blue ${PORT}}`);
+
+	process.on("unhandledRejection", (reason, p) => {
+		global.console.log("Unhandled Rejection at:", p, "reason:", reason);
+		process.exit(1); //eslint-disable-line no-process-exit
+	});
+	process.on("uncaughtException", err => {
+		global.console.log("Unhandled Exception:", err);
+		process.exit(1); //eslint-disable-line no-process-exit
+	});
+
+	process.on("SIGINT", function() {
+		global.console.log("\nGracefully shutting down from SIGINT (Ctrl-C)");
+		process.exit(0); //eslint-disable-line no-process-exit
+	});
+}

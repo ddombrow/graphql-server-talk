@@ -1,0 +1,48 @@
+{
+	"name": "graphql-server-talk",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./server/index.js",
+	"engines": {
+		"node": ">=8.0.0"
+	},
+	"dependencies": {
+		"chalk": "^2.3.2",
+		"content-type": "^1.0.4",
+		"graphql": "^0.13.2",
+		"graphql-tools": "^2.24.0",
+		"iterall": "^1.2.2",
+		"pino": "^4.16.1",
+		"raw-body": "^2.3.2",
+		"shortid": "^2.2.8",
+		"subscriptions-transport-ws": "^0.9.7"
+	},
+	"devDependencies": {
+		"apollo-fetch": "^0.7.0",
+		"cross-fetch": "^2.1.0",
+		"eslint": "^4.19.1",
+		"eslint-plugin-jest": "^21.15.0",
+		"eslint-plugin-node": "^6.0.1",
+		"jest": "^22.4.3",
+		"nodemon": "^1.17.3"
+	},
+	"scripts": {
+		"test": "jest",
+		"test:watch": "jest --watch",
+		"start": "nodemon --inspect"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ddombrow/graphql-server-talk.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ddombrow/graphql-server-talk/issues"
+	},
+	"homepage": "https://github.com/ddombrow/graphql-server-talk#readme",
+	"nodemonConfig": {
+		"ignore": ["test/*", "docs/*", "slides/*", "client/*"],
+		"delay": "500"
+	}
+}

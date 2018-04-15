@@ -1,3 +1,20 @@
 {
-	"extends": ["recommended/node"]
+	"plugins": ["node", "jest"],
+	"extends": ["eslint:recommended", "plugin:node/recommended"],
+	"env": {
+		"es6": true,
+		"jest/globals": true
+	},
+	"parserOptions": { "ecmaVersion": 2018 },
+	"rules": {
+		"node/no-extraneous-require": "off",
+		"node/no-unpublished-require": "off",
+		"node/no-unsupported-features": [
+			"error",
+			{
+				"version": 8.3,
+				"ignores": []
+			}
+		]
+	}
 }

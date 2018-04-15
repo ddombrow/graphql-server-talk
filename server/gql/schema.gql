@@ -1,0 +1,20 @@
+type Alarm {
+	id: String
+	name: String
+	time: Float
+}
+
+type Query {
+	hello: String
+	time: Float
+	alarms: [Alarm]
+}
+
+type Mutation {
+	setAlarm(name: String, time: Float): Alarm
+	deleteAlarm(id: String): Boolean
+}
+
+type Subscription {
+	alarmChanged: Alarm
+}
