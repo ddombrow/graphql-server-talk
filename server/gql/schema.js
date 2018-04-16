@@ -12,7 +12,7 @@ const resolvers = {
 			return ctx.state.getTime();
 		},
 		alarms: (obj, args, ctx) => {
-			return ctx.state.getAlarms();
+			return Promise.resolve(ctx.state.getAlarms());
 		}
 	},
 	Mutation: {
@@ -27,7 +27,7 @@ const resolvers = {
 	},
 	Subscription: {
 		alarmChanged: {
-			resolve: (payload, args) => {
+			resolve: payload => {
 				return payload;
 			},
 			subscribe: (obj, args, ctx) => ctx.state.getAsyncIterator()

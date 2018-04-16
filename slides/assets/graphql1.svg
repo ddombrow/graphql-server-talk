@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1024px" height="348px" viewBox="0 0 1024 348" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>Slice</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="403" height="91"></rect>
+        <rect id="path-2" x="0" y="0" width="403" height="91"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="GraphQL" font-family="Geomanist-Regular, Geomanist" font-size="64" font-weight="normal" fill="#000000">
+            <tspan x="381" y="95">GraphQL</tspan>
+        </text>
+        <g id="Group" transform="translate(34.000000, 179.000000)">
+            <g id="Rectangle">
+                <use fill="#E3E7FE" fill-rule="evenodd" xlink:href="#path-1"></use>
+                <rect stroke="#979797" stroke-width="1" x="0.5" y="0.5" width="402" height="90"></rect>
+            </g>
+            <text id="a-Type/Schema-System" font-family="Geomanist-Regular, Geomanist" font-size="24" font-weight="normal" fill="#000000">
+                <tspan x="72" y="51">a Type/Schema System</tspan>
+            </text>
+        </g>
+        <g id="Group-2" transform="translate(587.000000, 174.000000)">
+            <g id="Rectangle">
+                <use fill="#E3E7FE" fill-rule="evenodd" xlink:href="#path-2"></use>
+                <rect stroke="#979797" stroke-width="1" x="0.5" y="0.5" width="402" height="90"></rect>
+            </g>
+            <text id="a-Query-Language" font-family="Geomanist-Regular, Geomanist" font-size="24" font-weight="normal" fill="#000000">
+                <tspan x="99" y="51">a Query Language</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
