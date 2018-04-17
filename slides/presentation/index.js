@@ -150,7 +150,8 @@ export default class Presentation extends React.Component {
 							subscriptions
 						</ListItem>
 						<ListItem>
-							<strong>iterall</strong> - a polyfill for async iterators
+							<strong>iterall</strong> - a polyfill for async iterators (until you&apos;re on Node
+							10+)
 						</ListItem>
 					</List>
 				</Slide>
